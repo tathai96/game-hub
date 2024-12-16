@@ -4,9 +4,10 @@ import {Genre} from "../model.ts";
 
 interface GenreProps {
     onSelectGenre: (genre: Genre) => void;
+    selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: GenreProps) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: GenreProps) => {
     const { genres, error, loading } = useGenres();
 
     if(error) return null;
@@ -19,7 +20,7 @@ const GenreList = ({ onSelectGenre }: GenreProps) => {
                     <List.Item key={genre.id} paddingY={"5px"} listStyleType="none">
                         <HStack>
                             <Image boxSize="32px" borderRadius={8} src={genre.image_background} />
-                            <Button onClick={() => onSelectGenre(genre)} variant={"ghost"} fontSize="lg">{genre.name}</Button>
+                            <Button fontWeight={ genre.id === selectedGenre?.id ? 'bold' : 'normal' } onClick={() => onSelectGenre(genre)} variant={"ghost"} fontSize="lg">{genre.name}</Button>
                         </HStack>
                     </List.Item>) }
             </List.Root>

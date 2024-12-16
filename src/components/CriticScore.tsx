@@ -5,8 +5,8 @@ interface CriticScoreProps {
 }
 
 const CriticScore = ({ score }: CriticScoreProps) => {
-    let colour = score > 75 ? 'green' : score > 60 ? 'yellow' : '';
-    let foreColour = score > 75 ? 'white' : score > 60 ? 'black' : 'black';
+    const colour = score > 75 ? 'green' : score > 60 ? 'yellow' : '';
+    const foreColour = score > 75 ? 'white' : score > 60 ? 'black' : 'black';
     return (
         <Badge color={foreColour} bg={colour} fontSize="14px" paddingX={2} borderRadius="4px">{score}</Badge>
     )

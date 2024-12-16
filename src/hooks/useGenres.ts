@@ -1,19 +1,19 @@
 import {useEffect, useState} from "react";
+import {Genre, GenreResult} from "../model.ts";
 import apiClient from "../services/api-client.ts";
 import {CanceledError} from "axios";
-import {FetchGamesResponse, Game} from "../model.ts";
 
-const useGames = () => {
-    const [games, setGames] = useState<Game[]>([]);
+const useGenres = () => {
+    const [genres, setGenres] = useState<Genre[]>([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        apiClient.get<FetchGamesResponse>('/games', { signal: controller.signal })
+        apiClient.get<GenreResult>('/genres', { signal: controller.signal })
             .then(res => {
-                setGames(res.data.results);
+                setGenres(res.data.results);
                 setLoading(false);
             })
             .catch(err => {
@@ -25,7 +25,7 @@ const useGames = () => {
         return () => controller.abort();
     }, []);
 
-    return { games, error, loading }
+    return { genres, error, loading }
 }
 
-export default useGames;
+export default useGenres;

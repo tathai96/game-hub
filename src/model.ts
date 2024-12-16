@@ -1,3 +1,9 @@
+export interface GamePlatform {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 export interface Game {
     id: number; // integer (ID)
     slug: string; // string <slug>, non-empty, ^[-a-zA-Z0-9_]+$
@@ -18,6 +24,7 @@ export interface Game {
     updated: string; // string <date-time> (Updated)
     esrb_rating: Record<string, any> | null; // object Nullable
     platforms: Array<Record<string, any>>; // Array of objects
+    parent_platforms: { platform: GamePlatform }[];
 }
 
 export interface FetchGamesResponse {

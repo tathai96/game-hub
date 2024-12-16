@@ -1,3 +1,25 @@
+export interface EachPlatformDetails {
+    id: number;
+    games_count: string;
+    image_background: string;
+    image: string;
+    name: string;
+    slug: string;
+    year_start: number;
+    year_end: number;
+}
+
+export interface PlatformDetails extends  GamePlatform{
+    platforms: EachPlatformDetails[];
+}
+
+export interface PlatformResult {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: PlatformDetails[];
+}
+
 export interface GenreResult {
     count: number;
     next: string | null;

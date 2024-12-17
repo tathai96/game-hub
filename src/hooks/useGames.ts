@@ -3,7 +3,7 @@ import apiClient from "../services/api-client.ts";
 import {CanceledError} from "axios";
 import {FetchGamesResponse, Game, Genre, PlatformDetails} from "../model.ts";
 
-const useGames = (selectedGenre: Genre | null, selectedPlatform: PlatformDetails | null) => {
+const useGames = (selectedGenre: Genre | null, selectedPlatform: PlatformDetails | null, selectedSortOrder: string | null) => {
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const useGames = (selectedGenre: Genre | null, selectedPlatform: PlatformDetails
         setLoading(true);
         apiClient.get<FetchGamesResponse>('/games', {
             signal: controller.signal,
-            params: {genres: selectedGenre?.id, platforms: selectedPlatform?.id}
+            params: {genres: selectedGenre?.id, platforms: selectedPlatform?.id, ordering: selectedSortOrder}
         })
             .then(res => {
                 setGames(res.data.results);
@@ -26,7 +26,7 @@ const useGames = (selectedGenre: Genre | null, selectedPlatform: PlatformDetails
             });
 
         return () => controller.abort();
-    }, [selectedGenre, selectedPlatform]);
+    }, [selectedGenre, selectedPlatform, selectedSortOrder]);
 
     return {games, error, loading}
 }

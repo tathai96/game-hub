@@ -10,6 +10,7 @@ import SortSelector from "./components/SortSelector.tsx";
 function App() {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
     const [selectedPlatform, setSelectedPlatform] = useState<PlatformDetails | null>(null);
+    const [selectedSortOrder, setSelectedSortOrder] = useState<string | null>(null);
 
     return (
         <Grid templateAreas={{
@@ -30,9 +31,9 @@ function App() {
             <GridItem area="main">
                 <HStack gap={5} paddingLeft={2} marginBottom={2}>
                     <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)} />
-                    <SortSelector />
+                    <SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder) => setSelectedSortOrder(sortOrder)} />
                 </HStack>
-                <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
+                <GameGrid selectedSortOrder={selectedSortOrder} selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
             </GridItem>
         </Grid>
     );

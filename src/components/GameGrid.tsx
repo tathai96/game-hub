@@ -7,11 +7,12 @@ import {Genre, PlatformDetails} from "../model.ts";
 interface GameGridProps {
     selectedGenre: Genre | null;
     selectedPlatform: PlatformDetails | null;
-    selectedSortOrder: string | null
+    selectedSortOrder: string | null;
+    searchValue: string | null;
 }
 
-const GameGrid = ({selectedGenre, selectedPlatform, selectedSortOrder}: GameGridProps) => {
-    const {games, error, loading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder);
+const GameGrid = ({selectedGenre, selectedPlatform, selectedSortOrder, searchValue}: GameGridProps) => {
+    const {games, error, loading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchValue);
     const skeletons = [1,2,3,4,5,6];
 
     return (

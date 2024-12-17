@@ -6,11 +6,13 @@ import {useState} from "react";
 import {Genre, PlatformDetails} from "./model.ts";
 import PlatformSelector from "./components/PlatformSelector.tsx";
 import SortSelector from "./components/SortSelector.tsx";
+import './App.css';
 
 function App() {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
     const [selectedPlatform, setSelectedPlatform] = useState<PlatformDetails | null>(null);
     const [selectedSortOrder, setSelectedSortOrder] = useState<string | null>(null);
+    const [searchItem, setSearchItem] = useState<string | null>(null);
 
     return (
         <Grid templateAreas={{
@@ -23,7 +25,7 @@ function App() {
               }}
         >
             <GridItem area="nav">
-                <Navbar/>
+                <Navbar onSearch={(value) => setSearchItem(value)} />
             </GridItem>
             <GridItem paddingX={5} display={{base: "none", lg: "block"}} area="aside">
                 <GenreList selectedGenre={selectedGenre} onSelectGenre={(genre) => setSelectedGenre(genre)}/>
@@ -33,7 +35,7 @@ function App() {
                     <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)} />
                     <SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder) => setSelectedSortOrder(sortOrder)} />
                 </HStack>
-                <GameGrid selectedSortOrder={selectedSortOrder} selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
+                <GameGrid searchValue={searchItem} selectedSortOrder={selectedSortOrder} selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
             </GridItem>
         </Grid>
     );

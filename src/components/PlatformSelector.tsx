@@ -2,8 +2,15 @@ import {MenuRoot, MenuContent, MenuItem, MenuTrigger} from "./ui/menu";
 import {Button, Spinner} from "@chakra-ui/react";
 import {BsChevronDown} from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms.ts";
+import {PlatformDetails} from "../model.ts";
+// import {SelectionDetails} from "@chakra-ui/react/dist/types/components/menu";
 
-const PlatformSelector = () => {
+interface PlatformSelectorProps {
+    onSelectPlatform: (platform: PlatformDetails) => void;
+    selectedPlatform: PlatformDetails | null;
+}
+
+const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: PlatformSelectorProps) => {
     const { platforms, loading } = usePlatforms();
 
     if(loading) return <Spinner />;
@@ -12,13 +19,13 @@ const PlatformSelector = () => {
         <MenuRoot>
             <MenuTrigger asChild>
                 <Button variant={"outline"} >
-                    Platform
+                    {selectedPlatform?.name || 'Platforms'}
                     <BsChevronDown />
                 </Button>
             </MenuTrigger>
             <MenuContent>
                 { platforms.map(platform => (
-                    <MenuItem key={platform.id} value={platform.slug}>{platform.name}</MenuItem>
+                    <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id} value={platform.slug}>{platform.name}</MenuItem>
                 )) }
                 {/*<MenuItem value="hello">Hello</MenuItem>*/}
             </MenuContent>

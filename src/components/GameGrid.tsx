@@ -12,15 +12,15 @@ interface GameGridProps {
 }
 
 const GameGrid = ({selectedGenre, selectedPlatform, selectedSortOrder, searchValue}: GameGridProps) => {
-    const {games, error, loading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchValue);
+    const {data: games, error, isLoading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchValue);
     const skeletons = [1,2,3,4,5,6];
 
     return (
         <>
-            {error && <Text color="red">{error}</Text>}
+            {error && <Text color="red">{isLoading}</Text>}
             <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} padding="10px" gap={3}>
-                {loading && skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
-                {games.map(game => <GameCard key={game.id} game={game} />)}
+                {isLoading && skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+                {games?.results.map(game => <GameCard key={game.id} game={game} />)}
             </SimpleGrid>
         </>
     )

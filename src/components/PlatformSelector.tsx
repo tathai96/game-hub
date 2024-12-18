@@ -11,9 +11,9 @@ interface PlatformSelectorProps {
 }
 
 const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: PlatformSelectorProps) => {
-    const { platforms, loading } = usePlatforms();
+    const { data: platforms, isLoading } = usePlatforms();
 
-    if(loading) return <Spinner />;
+    if(isLoading) return <Spinner />;
 
     return (
         <MenuRoot>
@@ -24,7 +24,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: PlatformSelect
                 </Button>
             </MenuTrigger>
             <MenuContent>
-                { platforms.map(platform => (
+                { platforms?.results.map(platform => (
                     <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id} value={platform.slug}>{platform.name}</MenuItem>
                 )) }
                 {/*<MenuItem value="hello">Hello</MenuItem>*/}

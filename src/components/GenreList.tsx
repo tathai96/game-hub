@@ -8,15 +8,15 @@ interface GenreProps {
 }
 
 const GenreList = ({ onSelectGenre, selectedGenre }: GenreProps) => {
-    const { genres, error, loading } = useGenres();
+    const { data: genres, error, isLoading } = useGenres();
 
     if(error) return null;
-    if(loading) return <Spinner />
+    if(isLoading) return <Spinner />
 
     return (
         <>
             <List.Root>
-                { genres.map(genre =>
+                { genres?.results.map(genre =>
                     <List.Item key={genre.id} paddingY={"5px"} listStyleType="none">
                         <HStack>
                             <Image objectFit={'cover'} boxSize="32px" borderRadius={8} src={genre.image_background} />

@@ -2,19 +2,12 @@ import {SimpleGrid, Spinner, Text} from "@chakra-ui/react";
 import useGames from "../hooks/useGames.ts";
 import GameCard from "./GameCard.tsx";
 import GameCardSkeleton from "./GameCardSkeleton.tsx";
-import {FetchGamesResponse, Game, Genre, PlatformDetails} from "../model.ts";
+import {FetchGamesResponse, Game} from "../model.ts";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Fragment} from "react";
 
-interface GameGridProps {
-    selectedGenre: Genre | null;
-    selectedPlatform: PlatformDetails | null;
-    selectedSortOrder: string | null;
-    searchValue: string | null;
-}
-
-const GameGrid = ({selectedGenre, selectedPlatform, selectedSortOrder, searchValue}: GameGridProps) => {
-    const {data, error, isLoading, fetchNextPage, hasNextPage} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchValue);
+const GameGrid = () => {
+    const {data, error, isLoading, fetchNextPage, hasNextPage} = useGames();
     const skeletons = [1,2,3,4,5,6];
 
     if (error) return <Text>{error.message}</Text>;

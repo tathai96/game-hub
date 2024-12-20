@@ -2,16 +2,12 @@ import {MenuRoot, MenuContent, MenuItem, MenuTrigger} from "./ui/menu";
 import {Button, Spinner} from "@chakra-ui/react";
 import {BsChevronDown} from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms.ts";
-import {PlatformDetails} from "../model.ts";
-// import {SelectionDetails} from "@chakra-ui/react/dist/types/components/menu";
+import useGameQueryStore from "../store.ts";
 
-interface PlatformSelectorProps {
-    onSelectPlatform: (platform: PlatformDetails) => void;
-    selectedPlatform: PlatformDetails | null;
-}
-
-const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: PlatformSelectorProps) => {
+const PlatformSelector = () => {
     const { data: platforms, isLoading } = usePlatforms();
+    const selectedPlatform = useGameQueryStore(s => s.gameQuery.platform);
+    const setSelectedPlatformId = useGameQueryStore(s => s.setPlatformId);
 
     if(isLoading) return <Spinner />;
 
@@ -19,13 +15,13 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: PlatformSelect
         <MenuRoot>
             <MenuTrigger asChild>
                 <Button variant={"outline"} >
-                    {selectedPlatform?.name || 'Platforms'}
+                    {selectedPlatform || 'Platforms'}
                     <BsChevronDown />
                 </Button>
             </MenuTrigger>
             <MenuContent>
                 { platforms?.results.map(platform => (
-                    <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id} value={platform.slug}>{platform.name}</MenuItem>
+                    <MenuItem onClick={() => setSelectedPlatformId(platform.id)} key={platform.id} value={platform.slug}>{platform.name}</MenuItem>
                 )) }
                 {/*<MenuItem value="hello">Hello</MenuItem>*/}
             </MenuContent>

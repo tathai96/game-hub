@@ -5,6 +5,7 @@ import ExpandableText from "../components/ExpandableText.tsx";
 import DefinitionItem from "../components/DefinitionItem.tsx";
 import CriticScore from "../components/CriticScore.tsx";
 import GameTrailer from "../components/GameTrailer.tsx";
+import GameScreenshots from "../components/GameScreenshots.tsx";
 
 const GameDetailPage = () => {
     const {slug} = useParams();
@@ -33,6 +34,7 @@ const GameDetailPage = () => {
                 </DefinitionItem>
             </SimpleGrid>
             <GameTrailer gameId={gameDetail.id}/>
+            <GameScreenshots gameId={gameDetail.id} />
         </>
     )
 }

@@ -175,3 +175,18 @@ export interface GameTrailer {
     previous: string | null;
     results: TrailerDetails[];
 }
+
+export interface GameScreenshotDetails {
+    id: number;
+    image: string;
+    hidden: boolean;
+    width: number;
+    height: number;
+}
+
+export interface GameScreenshot {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: GameScreenshotDetails[];
+}

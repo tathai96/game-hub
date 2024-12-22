@@ -159,3 +159,19 @@ export interface GameDetail {
         };
     }[];
 }
+
+export interface TrailerDetails {
+    id: number;
+    name: string;
+    preview: string;
+    data: {
+        [key: string]: string;
+    }
+}
+
+export interface GameTrailer {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: TrailerDetails[];
+}

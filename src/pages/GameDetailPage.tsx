@@ -4,6 +4,7 @@ import {Heading, SimpleGrid, Spinner, Text} from "@chakra-ui/react";
 import ExpandableText from "../components/ExpandableText.tsx";
 import DefinitionItem from "../components/DefinitionItem.tsx";
 import CriticScore from "../components/CriticScore.tsx";
+import GameTrailer from "../components/GameTrailer.tsx";
 
 const GameDetailPage = () => {
     const {slug} = useParams();
@@ -31,6 +32,7 @@ const GameDetailPage = () => {
                     { gameDetail.publishers.map(publisher => (<Text key={publisher.id}>{publisher.name}</Text>)) }
                 </DefinitionItem>
             </SimpleGrid>
+            <GameTrailer gameId={gameDetail.id}/>
         </>
     )
 }

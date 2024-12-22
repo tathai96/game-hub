@@ -124,11 +124,28 @@ export interface GameDetail {
     parents_count: number;
     additions_count: number;
     game_series_count: number;
+    genres: {
+        id: number;
+        name: string;
+        slug: string;
+        games_count: number;
+        image_background: string;
+    }[];
+    publishers: {
+        id: number;
+        name: string;
+        slug: string;
+        games_count: number;
+        image_background: string;
+    }[];
     esrb_rating: {
         id: number;
         slug: string;
         name: string;
     };
+    parent_platforms: {
+        platform: GamePlatform;
+    }[];
     platforms: {
         platform: {
             id: number;
